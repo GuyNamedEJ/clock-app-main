@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Inter', sans-serif;
+    background: url('/assets/desktop/bg-image-daytime.jpg') rgba(0, 0, 0, 0.3);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: multiply;
+    min-height: 100vh;
+    margin:0 auto;
+    width: 100%;
+    color:white;
+    /* max-width: 1400px; */
+}
+
+h1{
+    font-weight: 700;
+    font-size: 200px;
+    letter-spacing: -5px;
+    line-height: 200px; 
+}
+
+h2{
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 68px;
+}
+
+h3{
+    font-weight: 700;
+    font-size: 24px;
+    line-height: -4px;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+}
+
+h4{
+    font-weight: 400;
+    font-size: 20px;
+    letter-spacing: 4px;
+    line-height: 28px;
+}
+
+h5{
+    font-weight: 700;
+    font-size:18px;
+    line-height: 28px;
+}
+
+h6{
+    font-weight: 300;
+    font-size:15px;
+    line-height: 28px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.container{
+    margin:56px 165px 100px 165px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+#quote-section{
+    margin-bottom:273px;
+    width:575px;
+    font-size: 18px;
+}
+
+#quote{
+    line-height: 2.8;
+}
+
+#author{
+    font-weight: 700;
+}
+
+#greeting {
+    display:flex;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+#greeting img{
+    width:24px;
+    margin-right:16px;
+}
+
+#timezone{
+    font-weight:300;
+    font-size:40px;
+    letter-spacing: 0;
+}
+
+#toggle-details{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:8px 9px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 5px;
+    border: none;
+    border-radius: 28px;
+    width:146px;
+}
+
+#toggle-details img{
+    width: 40px;
+    margin-left:13px;
+}
+
+#lower-flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#details-section{
+    height:400px;
+    width:100%;
+    background-color: rgba(255, 255, 255, 0.75);
+    background-blend-mode: multiply;
+    color:black;
+    padding:74px 431px 74px 165px;
+    display:flex;
+    align-items: center;
+    justify-content: start;
+    
+}
+
+#details-left
+{
+    border-right:3px solid #979797;
+    padding-right: 147px;
+}
+
+#details-right{
+    padding-left: 94px;
+}
+
+.current-timezone, .day-of-week{
+    margin-bottom: 42px;
+}
+
+
+@media (max-width: 850px) {
+    body{
+        background-image: url('/assets/tablet/bg-image-daytime.jpg');
+        
+    }
+
+    h1{
+        font-size: 175px;
+    }
+
+    h2{
+        font-size:40px;
+    }
+
+    h6{
+        font-size: 13px;
+    }
+
+    .container{
+        margin:80px 64px 64px 64px;
+    }
+
+    #lower-flex
+    {flex-direction: column;
+        align-items: start;
+        justify-content: space-between;
+    }
+    
+    #lower-flex h3{
+        margin-bottom:80px;
+    }
+
+    #details-section
+    {
+        padding:119px 166px 119px 64px;
+    }
+
+    #details-left
+    {
+        border-right: none;
+        padding-right:0;
+        margin-right: 80px;
+    }
+
+    #details-right
+    {
+        padding-left: 0;
+    }
+}
+
+@media (min-width: 375px) and (max-width: 799px)
+{
+
+    body
+    {
+        background-image: url('/assets/mobile/bg-image-daytime.jpg');
+        background-size: contain;
+    }
+
+    p{
+        font-size: 12px;
+    }
+
+    h1{
+        font-size: 100px;
+        line-height: 100px;
+    }
+
+    .container
+    {
+        margin:32px 26px;
+    }
+
+    #greeting
+    {
+        display:inline;
+        width:100%;
+    }
+}
