@@ -15,7 +15,6 @@
     <title>Frontend Mentor | Clock App</title>
   </head>
   <body>
-      
     <section class="container">
       <div id="quote-section">
         <p id="quote">
@@ -27,49 +26,47 @@
       </div>
 
       <div id="time-block">
-          <p id="greeting">
-            <img src="/assets/desktop/icon-sun.svg" alt="icon-sun" /><span id="time-of-day">Good Morning</span>, it's currently
-          </p>
-          <h1 id="time"></h1>
-          <span id="tz-abbreviation"></span>
-          <div id="lower-flex">
-            <h3 id="location"></h3>
-            <button id="toggle-details" class="hide" onclick="showHide()"> <span id="button-text">More</span> <img id="arrow" src="/assets/desktop/icon-arrow-up.svg" alt=""></button>
-          </div> 
+        <p id="greeting">
+          <img src="/assets/desktop/icon-sun.svg" alt="icon-sun" /><span
+            id="time-of-day"
+            ></span
+          >
+        </p>
+        <h1 id="time"></h1>
+        <span id="tz-abbreviation"></span>
+        <div id="lower-flex">
+          <h3 id="location"></h3>
+          <button id="toggle-details" class="hide" onclick="showHide()">
+            <span id="button-text">More</span>
+            <img id="arrow" src="/assets/desktop/icon-arrow-up.svg" alt="" />
+          </button>
+        </div>
       </div>
     </section>
 
-    <section id="details-section">
-        <div id="details-left">
-          <div class="current-timezone">
-            <h6>Current Timezone</h6>
-            <h2 id="timezone-display">Europe/London</h2>
-          </div>
-          <div id="day-of-year">
-            <h6>Day of the year</h6>
-            <h2 id="day-of-year-display">295</h2>
-          </div>
+    <section id="details-section" class="flex-container">
+      <div id="details-left">
+        <div class="current-timezone">
+          <h6>Current Timezone</h6>
+          <h2 id="timezone-display">Europe/London</h2>
         </div>
+        <div id="day-of-year" class="day-of-year">
+          <h6>Day of the year</h6>
+          <h2 id="day-of-year-display">295</h2>
+        </div>
+      </div>
 
-        <div class="details-right">
-          <div class="day-of-week">
-            <h6>Day of the week</h6>
-            <h2 id="day-of-week-display">5</h2>
-          </div>
-          <div id="week-of-year">
-            <h6>Week Number</h6>
-            <h2 id="day-of-year-year">42</h2>
-          </div>
+      <div id="details-right">
+        <div class="day-of-week">
+          <h6>Day of the week</h6>
+          <h2 id="day-of-week-display">5</h2>
         </div>
+        <div id="week-of-year" class="week-of-year">
+          <h6>Week Number</h6>
+          <h2 id="week-number-display">42</h2>
+        </div>
+      </div>
     </section>
-    <!-- , it's currently
-  in
-  More
-  Less
-  Current timezone
-  Day of the year
-  Day of the week
-  Week number -->
     <script src="/js/app.js"></script>
   </body>
 </html>
