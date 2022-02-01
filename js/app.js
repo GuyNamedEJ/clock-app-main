@@ -3,17 +3,7 @@ let toggleDetails = document.getElementById("toggle-details");
 let detailsSection = document.getElementById("details-section");
 let quoteSection = document.getElementById("quote-section");
 
-let timeRequestURL = 'http://worldtimeapi.org/api/ip';
-    let timeRequest = new XMLHttpRequest();
-    timeRequest.open('GET', timeRequestURL);
-    timeRequest.responseType = 'json';
-    timeRequest.send();
 
-    timeRequest.onload = function() {
-        const timeData = timeRequest.response;
-        updateTime(timeData);
-    }
-    
 function getTime()
 {
     let timeRequestURL = 'http://worldtimeapi.org/api/ip';
