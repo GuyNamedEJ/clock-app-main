@@ -134,10 +134,12 @@ function showHide()
 function setGreeting(time)
 {
   let greeting = document.getElementById('time-of-day');
+  
   let hours = time.slice(0,2);
   
   if(hours >= 5 && hours <= 11)
   {
+    document.getElementById("time-icon").src = "/assets/desktop/icon-sun.svg";
     greeting.textContent = "Good Morning";
     if(desktop.matches)
     {
@@ -155,19 +157,33 @@ function setGreeting(time)
     
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundSize = "cover";
-
    
   }
 
   if(hours >= 12 && hours <= 17 )
   {
     greeting.textContent = "Good Afternoon";
+    
   }
 
   if((hours >= 18 && hours <= 23) || (hours >= 0 && hours <= 4))
   {
     greeting.textContent = "Good evening";
-    document.body.style.background = "url('/assets/desktop/bg-image-nighttime.jpg') rgba(0, 0, 0, 0.3)"; 
+    document.getElementById("time-icon").src = "/assets/desktop/icon-moon.svg";
+    if(desktop.matches)
+    {
+      document.body.style.background = "url('/assets/desktop/bg-image-nighttime.jpg') rgba(0, 0, 0, 0.3)";
+    }
+    if(tablet.matches)
+    {
+      document.body.style.background = "url('/assets/tablet/bg-image-nighttime.jpg') rgba(0, 0, 0, 0.3)"; 
+    }
+
+    if(mobile.matches || small.matches)
+    {
+      document.body.style.background = "url('/assets/mobile/bg-image-nighttime.jpg') rgba(0, 0, 0, 0.3)"; 
+    }
+   
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundSize = "cover";
  
