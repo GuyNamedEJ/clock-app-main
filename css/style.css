@@ -10,13 +10,15 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-blend-mode: multiply;
-    min-height: 100vh;
     margin:0 auto;
-    width: 100%;
     color:white;
+    min-height: 100vh;
     /* max-width: 1400px; */
 }
 
+.hide{
+    display: none;
+}
 h1{
     font-weight: 700;
     font-size: 200px;
@@ -60,10 +62,9 @@ h6{
 }
 
 .container{
-    margin:56px 165px 100px 165px;
+    padding:56px 165px 0 165px;
     display: flex;
     flex-direction: column;
-    
 }
 
 #quote-section{
@@ -73,7 +74,7 @@ h6{
 }
 
 #quote{
-    line-height: 2.8;
+    line-height: 1.8;
 }
 
 #author{
@@ -92,10 +93,16 @@ h6{
     margin-right:16px;
 }
 
-#timezone{
-    font-weight:300;
+#time{
+    display:inline;
+}
+
+#tz-abbreviation{
+    font-weight:700;
     font-size:40px;
     letter-spacing: 0;
+    display:inline;
+    margin-left:13px;
 }
 
 #toggle-details{
@@ -122,17 +129,21 @@ h6{
     align-items: center;
 }
 
+.flex{
+    display:flex;
+    align-items: center;
+    justify-content: start;
+}
+
 #details-section{
-    height:400px;
+    /* height:400px; */
     width:100%;
     background-color: rgba(255, 255, 255, 0.75);
     background-blend-mode: multiply;
     color:black;
+    margin-top:56px;
     padding:74px 431px 74px 165px;
-    display:flex;
-    align-items: center;
-    justify-content: start;
-    
+    display:none;
 }
 
 #details-left
@@ -206,7 +217,6 @@ h6{
     body
     {
         background-image: url('/assets/mobile/bg-image-daytime.jpg');
-        background-size: contain;
     }
 
     p{

@@ -15,6 +15,7 @@
     <title>Frontend Mentor | Clock App</title>
   </head>
   <body>
+      
     <section class="container">
       <div id="quote-section">
         <p id="quote">
@@ -29,10 +30,11 @@
           <p id="greeting">
             <img src="/assets/desktop/icon-sun.svg" alt="icon-sun" /><span id="time-of-day">Good Morning</span>, it's currently
           </p>
-          <h1 id="time">11:37<span id="timezone">BST</span></h1>
+          <h1 id="time"></h1>
+          <span id="tz-abbreviation"></span>
           <div id="lower-flex">
-            <h3>in <span id="location">London, UK</span></h3>
-            <button id="toggle-details">More <img src="/assets/desktop/icon-arrow-up.svg" alt=""></button>
+            <h3 id="location"></h3>
+            <button id="toggle-details" class="hide" onclick="showHide()"> <span id="button-text">More</span> <img id="arrow" src="/assets/desktop/icon-arrow-up.svg" alt=""></button>
           </div> 
       </div>
     </section>
@@ -61,12 +63,9 @@
         </div>
     </section>
     <!-- , it's currently
-
   in
-
   More
   Less
-
   Current timezone
   Day of the year
   Day of the week
