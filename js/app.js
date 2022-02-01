@@ -6,7 +6,7 @@ let quoteSection = document.getElementById("quote-section");
 
 function getTime()
 {
-    let timeRequestURL = 'http://worldtimeapi.org/api/ip';
+    let timeRequestURL = 'https://worldtimeapi.org/api/ip';
     let timeRequest = new XMLHttpRequest();
     timeRequest.open('GET', timeRequestURL);
     timeRequest.responseType = 'json';
