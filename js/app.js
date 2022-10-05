@@ -1,3 +1,4 @@
+let API_KEY = config.LOCATION_KEY;
 // Get time by user's IP address
 let toggleDetails = document.getElementById("toggle-details");
 let detailsSection = document.getElementById("details-section");
@@ -26,7 +27,7 @@ function getTime() {
 
 // Get Location by client's IP Address 
 
-fetch("https://api.ipbase.com/v2/info?apikey=2b6fc8f0-73e2-11ec-8fcf-570906a9ba81")
+fetch("https://api.ipbase.com/v2/info?apikey=" + API_KEY)
       .then(res => res.json())
       .then(data => {
         userTZ = data.data.timezone.id;
