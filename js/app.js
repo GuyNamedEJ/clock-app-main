@@ -10,7 +10,7 @@ let mobile = window.matchMedia("(min-width: 376px) and (max-width: 799px)");
 let small = window.matchMedia("(max-width: 375px)");
 
 function getTime() {
-  let timeRequestURL = "http://worldtimeapi.org/api/ip/" + userIP;
+  let timeRequestURL = "https://worldtimeapi.org/api/ip/" + userIP;
   let timeRequest = new XMLHttpRequest();
   timeRequest.open("GET", timeRequestURL);
   timeRequest.responseType = "json";
