@@ -26,7 +26,7 @@ function getTime() {
 
 // Get Location by client's IP Address 
 
-fetch("https://api.ipbase.com/v2/info?apikey=2b6fc8f0-73e2-11ec-8fcf-570906a9ba81&ip=1.1.1.1")
+fetch("https://api.ipbase.com/v2/info?apikey=2b6fc8f0-73e2-11ec-8fcf-570906a9ba81")
       .then(res => res.json())
       .then(data => {
         userIP = data.data.ip;
