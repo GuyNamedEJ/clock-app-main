@@ -5,6 +5,8 @@ let quoteSection = document.getElementById("quote-section");
 let userIP;
 let city;
 let state;
+
+
 // Media Queries
 let desktop = window.matchMedia("(min-width: 1400px)");
 let tablet = window.matchMedia("(max-width: 850px)");
@@ -28,44 +30,37 @@ function getTime() {
 
 // Get Location by client's IP Address 
 
-fetch("http://ip-api.com/json/")
-      .then(res => res.json())
-      .then(data => {
-        userIP = data.query;
-        console.log(data);
-        setInterval(getTime, 1000);
-        city = data.city;
-        state = data.regionName;
-        setLocation(city, state);
+// fetch("http://ip-api.com/json/")
+//       .then(res => res.json())
+//       .then(data => {
+//         userIP = data.query;
+//         console.log(data);
+//         setInterval(getTime, 1000);
+//         city = data.city;
+//         state = data.regionName;
+//         setLocation(city, state);
         
-      })
-      .catch(err => {
-        console.log(`error ${err}`)
-      });
+//       })
+//       .catch(err => {
+//         console.log(`error ${err}`)
+//       });
 
 
-/**
-  let locationRequest = new XMLHttpRequest();
-locationRequest.open("GET", locationRequestURL);
-locationRequest.responseType = "json";
-locationRequest.send();
 
-locationRequest.onload = function () {
-  const locationData = locationRequest.response;
-  setLocation(locationData);
-};
 
-*/
+const api_url = "http://ip-api.com/json/";
+async function getLocation()
+{
+  const response = await fetch(api_url);
+  const data = await response.json();
+  userIP = data.query;
+  setInterval(getTime, 1000);
+  city = data.city;
+  state = data.regionName;
+  setLocation(city, state);
+}
 
-// const api_url = "https://api.freegeoip.app/json/?apikey=2b6fc8f0-73e2-11ec-8fcf-570906a9ba81";
-// async function getLocation()
-// {
-//   const response = await fetch(api_url);
-//   const data = await response.json();
-//   console.log(data);
-// }
-
-// getLocation();
+getLocation();
 
 
 // Get Random Quote
@@ -129,7 +124,7 @@ function setLocation(city, state) {
   let locationDisplay = document.getElementById("location");
   locationDisplay.textContent =
     "in " + city + ", " + state;
-  console.log(locationObj["city"]);
+  
 }
 
 function showHide() {
