@@ -17,3 +17,5 @@
 .prettierignore
 
 config.js
+
+.env
