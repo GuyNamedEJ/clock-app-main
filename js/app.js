@@ -48,15 +48,15 @@ function getTime() {
 
 
 
-const api_url = "http://ip-api.com/json/";
+const api_url = "https://geo.ipify.org/api/v2/country,city?apiKey=at_ILesY5Ea31ir7gLgwNkINdILMGjbw&ipAddress=";
 async function getLocation()
 {
   const response = await fetch(api_url);
   const data = await response.json();
-  userIP = data.query;
+  userIP = data.ip;
   setInterval(getTime, 1000);
-  city = data.city;
-  state = data.regionName;
+  city = data.location.city;
+  state = data.location.region;
   setLocation(city, state);
 }
 
