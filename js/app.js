@@ -3,6 +3,8 @@ let toggleDetails = document.getElementById("toggle-details");
 let detailsSection = document.getElementById("details-section");
 let quoteSection = document.getElementById("quote-section");
 let userTZ;
+let city;
+let state;
 // Media Queries
 let desktop = window.matchMedia("(min-width: 1400px)");
 let tablet = window.matchMedia("(max-width: 850px)");
@@ -30,8 +32,13 @@ fetch("https://api.ipbase.com/v2/info?apikey=2b6fc8f0-73e2-11ec-8fcf-570906a9ba8
       .then(res => res.json())
       .then(data => {
         userTZ = data.data.timezone.id;
-        setInterval(getTime, 1000);
+        console.log(data);
         console.log(data.data.timezone.id)
+        city = data.data.location.city.name;
+        state = data.data.location.region.name;
+        setInterval(getTime, 1000);
+        setLocation(city, state);
+        
       })
       .catch(err => {
         console.log(`error ${err}`)
@@ -119,10 +126,10 @@ function displayRandomQuote(randomQuoteObj) {
   authorDisplay.textContent = randomQuoteObj["author"];
 }
 
-function setLocation(locationObj) {
+function setLocation(city, state) {
   let locationDisplay = document.getElementById("location");
   locationDisplay.textContent =
-    "in " + locationObj["city"] + ", " + locationObj["region_code"];
+    "in " + city + ", " + state;
   console.log(locationObj["city"]);
 }
 
