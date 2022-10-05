@@ -224,6 +224,9 @@ h6{
 @media (min-width: 375px) and (max-width: 799px)
 {
 
+    .container
+    {}
+
     #quote-section
     {
         width:100%;
@@ -309,8 +312,7 @@ h6{
 
     .current-timezone h2, .day-of-year h2, .day-of-week h2, .week-of-year h2
     {
-        font-size:20px;
-        margin-bottom:16px;
+        font-size:15px;
         line-height: 20px;
     }
 

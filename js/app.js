@@ -2,7 +2,7 @@
 let toggleDetails = document.getElementById("toggle-details");
 let detailsSection = document.getElementById("details-section");
 let quoteSection = document.getElementById("quote-section");
-
+let userIP;
 // Media Queries
 let desktop = window.matchMedia("(min-width: 1400px)");
 let tablet = window.matchMedia("(max-width: 850px)");
@@ -10,7 +10,7 @@ let mobile = window.matchMedia("(min-width: 376px) and (max-width: 799px)");
 let small = window.matchMedia("(max-width: 375px)");
 
 function getTime() {
-  let timeRequestURL = "https://worldtimeapi.org/api/ip";
+  let timeRequestURL = "http://worldtimeapi.org/api/ip/" + userIP;
   let timeRequest = new XMLHttpRequest();
   timeRequest.open("GET", timeRequestURL);
   timeRequest.responseType = "json";
@@ -22,12 +22,24 @@ function getTime() {
   };
 }
 
-setInterval(getTime, 1000);
 
-// Get Location by client's IP Address
-let locationRequestURL =
-  "https://api.freegeoip.app/json/?apikey=2b6fc8f0-73e2-11ec-8fcf-570906a9ba81";
-let locationRequest = new XMLHttpRequest();
+
+// Get Location by client's IP Address 
+
+fetch("https://api.ipbase.com/v2/info?apikey=2b6fc8f0-73e2-11ec-8fcf-570906a9ba81&ip=1.1.1.1")
+      .then(res => res.json())
+      .then(data => {
+        userIP = data.data.ip;
+        setInterval(getTime, 1000);
+        console.log(data.data.ip)
+      })
+      .catch(err => {
+        console.log(`error ${err}`)
+      });
+
+
+/**
+  let locationRequest = new XMLHttpRequest();
 locationRequest.open("GET", locationRequestURL);
 locationRequest.responseType = "json";
 locationRequest.send();
@@ -36,6 +48,19 @@ locationRequest.onload = function () {
   const locationData = locationRequest.response;
   setLocation(locationData);
 };
+
+*/
+
+// const api_url = "https://api.freegeoip.app/json/?apikey=2b6fc8f0-73e2-11ec-8fcf-570906a9ba81";
+// async function getLocation()
+// {
+//   const response = await fetch(api_url);
+//   const data = await response.json();
+//   console.log(data);
+// }
+
+// getLocation();
+
 
 // Get Random Quote
 let randomQuoteURL =
@@ -129,7 +154,7 @@ function setGreeting(time) {
 
   if (hours >= 5 && hours <= 11) {
     document.getElementById("time-icon").src = "/assets/desktop/icon-sun.svg";
-    greeting.textContent = "Good Morning";
+    greeting.textContent = "Good Morning, it's currently";
     if (desktop.matches) {
       document.body.style.background =
         "url('/assets/desktop/bg-image-daytime.jpg') rgba(0, 0, 0, 0.3)";
@@ -149,11 +174,11 @@ function setGreeting(time) {
   }
 
   if (hours >= 12 && hours <= 17) {
-    greeting.textContent = "Good Afternoon";
+    greeting.textContent = "Good Afternoon, its currently";
   }
 
   if ((hours >= 18 && hours <= 23) || (hours >= 0 && hours <= 4)) {
-    greeting.textContent = "Good evening";
+    greeting.textContent = "Good evening, it's currently";
     document.getElementById("time-icon").src = "/assets/desktop/icon-moon.svg";
    
     if (desktop.matches) {
@@ -174,3 +199,5 @@ function setGreeting(time) {
     document.body.style.backgroundSize = "cover";
   }
 }
+
+
