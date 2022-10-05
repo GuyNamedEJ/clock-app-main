@@ -2,7 +2,7 @@
 let toggleDetails = document.getElementById("toggle-details");
 let detailsSection = document.getElementById("details-section");
 let quoteSection = document.getElementById("quote-section");
-let userTZ;
+let userIP;
 let city;
 let state;
 // Media Queries
@@ -12,7 +12,7 @@ let mobile = window.matchMedia("(min-width: 376px) and (max-width: 799px)");
 let small = window.matchMedia("(max-width: 375px)");
 
 function getTime() {
-  let timeRequestURL = "https://worldtimeapi.org/api/timezone/" + userTZ;
+  let timeRequestURL = "https://worldtimeapi.org/api/ip/" + userIP;
   let timeRequest = new XMLHttpRequest();
   timeRequest.open("GET", timeRequestURL);
   timeRequest.responseType = "json";
@@ -28,15 +28,14 @@ function getTime() {
 
 // Get Location by client's IP Address 
 
-fetch("https://api.ipbase.com/v2/info?apikey=2b6fc8f0-73e2-11ec-8fcf-570906a9ba81")
+fetch("http://ip-api.com/json/")
       .then(res => res.json())
       .then(data => {
-        userTZ = data.data.timezone.id;
+        userIP = data.query;
         console.log(data);
-        console.log(data.data.timezone.id)
-        city = data.data.location.city.name;
-        state = data.data.location.region.name;
         setInterval(getTime, 1000);
+        city = data.city;
+        state = data.regionName;
         setLocation(city, state);
         
       })
