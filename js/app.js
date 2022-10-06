@@ -1,4 +1,3 @@
-// Get time by user's IP address
 let toggleDetails = document.getElementById("toggle-details");
 let detailsSection = document.getElementById("details-section");
 let quoteSection = document.getElementById("quote-section");
@@ -26,55 +25,29 @@ function getTime() {
   };
 }
 
-
-
-// Get Location by client's IP Address 
-
-// fetch("http://ip-api.com/json/")
-//       .then(res => res.json())
-//       .then(data => {
-//         userIP = data.query;
-//         console.log(data);
-//         setInterval(getTime, 1000);
-//         city = data.city;
-//         state = data.regionName;
-//         setLocation(city, state);
-        
-//       })
-//       .catch(err => {
-//         console.log(`error ${err}`)
-//       });
-
-
-
-
 const api_url = "https://geo.ipify.org/api/v2/country,city?apiKey=at_ILesY5Ea31ir7gLgwNkINdILMGjbw&ipAddress=";
 async function getLocation()
 {
   const response = await fetch(api_url);
   const data = await response.json();
   userIP = data.ip;
-  setInterval(getTime, 1000);
+  console.log(data.ip)
   city = data.location.city;
   state = data.location.region;
+  getTime()
   setLocation(city, state);
 }
-
+setInterval(getTime, 1000);
 getLocation();
 
+async function getQuote()
+{
+  const res = await fetch("https://programming-quotes-api.herokuapp.com/Quotes/random")
+  const data = await res.json()
+  displayRandomQuote(data)
+}
+getQuote();
 
-// Get Random Quote
-let randomQuoteURL =
-  "https://programming-quotes-api.herokuapp.com/Quotes/random";
-let quoteRequest = new XMLHttpRequest();
-quoteRequest.open("GET", randomQuoteURL);
-quoteRequest.responseType = "json";
-quoteRequest.send();
-
-quoteRequest.onload = function () {
-  const randomQuote = quoteRequest.response;
-  displayRandomQuote(randomQuote);
-};
 
 function updateTime(jsonObj) {
   let timeDisplay = document.getElementById("time");
@@ -178,7 +151,8 @@ function setGreeting(time) {
     greeting.textContent = "Good Afternoon, its currently";
   }
 
-  if ((hours >= 18 && hours <= 23) || (hours >= 0 && hours <= 4)) {
+  if ((hours >= 18 && hours <= 23) || (hours >= 0 && hours <= 4)) 
+  {
     greeting.textContent = "Good evening, it's currently";
     document.getElementById("time-icon").src = "/assets/desktop/icon-moon.svg";
    
