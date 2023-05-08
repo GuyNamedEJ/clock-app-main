@@ -1,6 +1,6 @@
-# The Planets: <a href="https://all-about-the-planets.onrender.com/" target="_blank">View Project</a>
+# Clock App with Quotes: <a href="https://clock-app-main.vercel.app/" target="_blank">View Project</a>
 <a href="https://project-globetrotter.netlify.app/" target="_blank">
-<img src="https://github.com/GuyNamedEJ/GuyNamedEJ/raw/main/planets-prev.gif"/>
+<img src="https://github.com/GuyNamedEJ/GuyNamedEJ/raw/main/clock-prev.gif"/>
 </a>
 
 
