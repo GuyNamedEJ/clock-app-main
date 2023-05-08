@@ -15,7 +15,8 @@ This projects uses a few APIs to get data.
 ## Skills Learned/Practiced
 - Fetching Data from APIs
 
-## Optimizations
+## Upcoming Optimizations/Updates
 - Refactor code to gather data from APIs
 - Create animation of showing/hiding date information panel
 - Random background image for day/night
+- Replace now defunct Programming Quotes generator with a different one.
