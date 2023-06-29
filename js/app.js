@@ -37,14 +37,16 @@ async function getLocation()
   getTime()
   setLocation(city, state);
 }
+
 setInterval(getTime, 1000);
 getLocation();
 
 async function getQuote()
 {
-  const res = await fetch("https://programming-quotes-api.herokuapp.com/Quotes/random")
+  const res = await fetch("https://api.quotable.io/quotes/random")
   const data = await res.json()
-  displayRandomQuote(data)
+  console.log(data[0])
+  displayRandomQuote(data[0])
 }
 getQuote();
 
@@ -89,8 +91,8 @@ function displayRandomQuote(randomQuoteObj) {
   let quoteDisplay = document.getElementById("quote");
   let authorDisplay = document.getElementById("author");
 
-  quoteDisplay.textContent = '"' + randomQuoteObj["en"] + '"';
-  authorDisplay.textContent = randomQuoteObj["author"];
+  quoteDisplay.textContent = '"' + randomQuoteObj.content + '"';
+  authorDisplay.textContent = randomQuoteObj.author;
 }
 
 function setLocation(city, state) {
