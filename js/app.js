@@ -5,27 +5,36 @@ let userIP;
 let city;
 let state;
 
-
 // Media Queries
 let desktop = window.matchMedia("(min-width: 1400px)");
-let tablet = window.matchMedia("(max-width: 850px)");
-let mobile = window.matchMedia("(min-width: 376px) and (max-width: 799px)");
+let tablet = window.matchMedia("(max-width: 768px)");
+let mobile = window.matchMedia("(min-width: 376px) and (max-width: 767px)");
 let small = window.matchMedia("(max-width: 375px)");
 
-function getTime() {
-  let timeRequestURL = "https://worldtimeapi.org/api/ip/" + userIP;
-  let timeRequest = new XMLHttpRequest();
-  timeRequest.open("GET", timeRequestURL);
-  timeRequest.responseType = "json";
-  timeRequest.send();
+// API URLS
+const api_url = "https://geo.ipify.org/api/v2/country,city?apiKey=at_ILesY5Ea31ir7gLgwNkINdILMGjbw&ipAddress=";
+const WORLD_TIME_URL = "https://worldtimeapi.org/api/ip/";
+const QUOTABLE_URL = "https://api.quotable.io/quotes/random";
 
-  timeRequest.onload = function () {
-    const timeData = timeRequest.response;
-    updateTime(timeData);
-  };
+// function getTime() {
+//   let timeRequestURL = "https://worldtimeapi.org/api/ip/" + userIP;
+//   let timeRequest = new XMLHttpRequest();
+//   timeRequest.open("GET", timeRequestURL);
+//   timeRequest.responseType = "json";
+//   timeRequest.send();
+//   timeRequest.onload = function () {
+//     const timeData = timeRequest.response;
+//     updateTime(timeData);
+//   };
+// }
+
+async function getTime(){
+  let response = await fetch(WORLD_TIME_URL)
+  let timeData = await response.json();
+  updateTime(timeData)
 }
 
-const api_url = "https://geo.ipify.org/api/v2/country,city?apiKey=at_ILesY5Ea31ir7gLgwNkINdILMGjbw&ipAddress=";
+
 async function getLocation()
 {
   const response = await fetch(api_url);
@@ -34,37 +43,8 @@ async function getLocation()
   console.log(data.ip)
   city = data.location.city;
   state = data.location.region;
-  getTime()
+  getTime();
   setLocation(city, state);
-}
-
-setInterval(getTime, 1000);
-getLocation();
-
-async function getQuote()
-{
-  const res = await fetch("https://api.quotable.io/quotes/random")
-  const data = await res.json()
-  console.log(data[0])
-  displayRandomQuote(data[0])
-}
-getQuote();
-
-
-function updateTime(jsonObj) {
-  let timeDisplay = document.getElementById("time");
-  let timezoneAbbreviation = document.getElementById("tz-abbreviation");
-  let time = jsonObj["datetime"].slice(11, 16);
-  let timezoneDisplay = document.getElementById("timezone-display");
-  timezone = jsonObj["timezone"].replace("_", " ");
-  dayOfYear(jsonObj);
-  dayOfWeek(jsonObj);
-  weekNumber(jsonObj);
-  setGreeting(time);
-
-  timeDisplay.textContent = time;
-  timezoneDisplay.textContent = timezone;
-  timezoneAbbreviation.textContent = jsonObj["abbreviation"];
 }
 
 function dayOfYear(jsonObj) {
@@ -87,6 +67,7 @@ function weekNumber(jsonObj) {
 
   weekNumberDisplay.textContent = weekNumber;
 }
+
 function displayRandomQuote(randomQuoteObj) {
   let quoteDisplay = document.getElementById("quote");
   let authorDisplay = document.getElementById("author");
@@ -127,6 +108,7 @@ function setGreeting(time) {
   let greeting = document.getElementById("time-of-day");
 
   let hours = time.slice(0, 2);
+  console.log(hours)
 
   if (hours >= 5 && hours <= 11) {
     document.getElementById("time-icon").src = "/assets/desktop/icon-sun.svg";
@@ -177,4 +159,29 @@ function setGreeting(time) {
   }
 }
 
+async function getQuote()
+{
+  const res = await fetch(QUOTABLE_URL)
+  const data = await res.json()
+  displayRandomQuote(data[0])
+}
+
+function updateTime(jsonObj) {
+  let timeDisplay = document.getElementById("time");
+  let timezoneAbbreviation = document.getElementById("tz-abbreviation");
+  let time = jsonObj["datetime"].slice(11, 16);
+  let timezoneDisplay = document.getElementById("timezone-display");
+  timezone = jsonObj["timezone"].replace("_", " ");
+  dayOfYear(jsonObj);
+  dayOfWeek(jsonObj);
+  weekNumber(jsonObj);
+  setGreeting(time);
+  timeDisplay.textContent = time;
+  timezoneDisplay.textContent = timezone;
+  timezoneAbbreviation.textContent = jsonObj["abbreviation"];
+}
+
+getQuote();
+getLocation();
+//setInterval(getTime, 1000);
 
