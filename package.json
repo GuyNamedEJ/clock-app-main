@@ -1,0 +1,14 @@
+{
+  "name": "clock-app-main",
+  "version": "1.0.0",
+  "description": "<a href=\"https://project-globetrotter.netlify.app/\" target=\"_blank\">\r <img src=\"https://github.com/GuyNamedEJ/GuyNamedEJ/raw/main/clock-prev.gif\"/>\r </a>",
+  "main": "config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1"
+  }
+}

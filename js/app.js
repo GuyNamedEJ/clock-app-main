@@ -1,9 +1,12 @@
+
 let toggleDetails = document.getElementById("toggle-details");
 let detailsSection = document.getElementById("details-section");
 let quoteSection = document.getElementById("quote-section");
+let timeDisplay = document.getElementById("time");
 let userIP;
 let city;
 let state;
+let seconds = 0;
 
 // Media Queries
 let desktop = window.matchMedia("(min-width: 1400px)");
@@ -12,40 +15,78 @@ let mobile = window.matchMedia("(min-width: 376px) and (max-width: 767px)");
 let small = window.matchMedia("(max-width: 375px)");
 
 // API URLS
-const api_url = "https://geo.ipify.org/api/v2/country,city?apiKey=at_ILesY5Ea31ir7gLgwNkINdILMGjbw&ipAddress=";
+const GEO_IP_URL = `https://geo.ipify.org/api/v2/country,city?apiKey=at_ILesY5Ea31ir7gLgwNkINdILMGjbw`;
 const WORLD_TIME_URL = "https://worldtimeapi.org/api/ip/";
 const QUOTABLE_URL = "https://api.quotable.io/quotes/random";
-
-// function getTime() {
-//   let timeRequestURL = "https://worldtimeapi.org/api/ip/" + userIP;
-//   let timeRequest = new XMLHttpRequest();
-//   timeRequest.open("GET", timeRequestURL);
-//   timeRequest.responseType = "json";
-//   timeRequest.send();
-//   timeRequest.onload = function () {
-//     const timeData = timeRequest.response;
-//     updateTime(timeData);
-//   };
-// }
 
 async function getTime(){
   let response = await fetch(WORLD_TIME_URL)
   let timeData = await response.json();
+  console.log(timeData)
   updateTime(timeData)
 }
 
-
-async function getLocation()
-{
-  const response = await fetch(api_url);
+async function getLocation(){
+  const response = await fetch(GEO_IP_URL);
   const data = await response.json();
-  userIP = data.ip;
-  console.log(data.ip)
   city = data.location.city;
   state = data.location.region;
   getTime();
   setLocation(city, state);
 }
+
+async function getQuote(){
+  const res = await fetch(QUOTABLE_URL)
+  const data = await res.json()
+  displayRandomQuote(data[0])
+}
+
+function updateTime(jsonObj) {
+ 
+  let timezoneAbbreviation = document.getElementById("tz-abbreviation");
+  let time = jsonObj["datetime"].slice(11, 16);
+  let timeArray = time.split(":")
+  let hours = parseInt(timeArray[0])
+  let timezoneDisplay = document.getElementById("timezone-display");
+  timezone = jsonObj["timezone"].replace("_", " ");
+  dayOfYear(jsonObj);
+  dayOfWeek(jsonObj);
+  weekNumber(jsonObj);
+  setGreeting(hours)
+  timeDisplay.textContent = time;
+  timezoneDisplay.textContent = timezone;
+  timezoneAbbreviation.textContent = jsonObj["abbreviation"];
+  setInterval(incrementClock, 1000)
+}
+
+
+function incrementClock(){
+  let timeArray = timeDisplay.textContent.split(':')
+  let hours = parseInt(timeArray[0])
+  let min = parseInt(timeArray[1])
+
+  if(seconds === 60 && min < 59){
+    seconds = 0;
+    min++;
+  }
+
+  if(min === 59){
+    min = 0;
+    seconds = 0;
+    hours === 24 ? hours = 0 :  hours++;
+  }
+
+  else{
+    seconds++;
+  }
+
+  let strHours = hours.toString().length < 2 ? hours.toString().padStart(2,'0') : hours.toString()
+  let strMin = min.toString().length < 2 ? min.toString().padStart(2,'0') : min.toString()
+  timeDisplay.textContent = `${strHours}:${strMin}`;
+  setGreeting(hours)
+}
+
+
 
 function dayOfYear(jsonObj) {
   let dayOfYearDisplay = document.getElementById("day-of-year-display");
@@ -104,13 +145,10 @@ function showHide() {
   }
 }
 
-function setGreeting(time) {
+function setGreeting(hours) {
   let greeting = document.getElementById("time-of-day");
 
-  let hours = time.slice(0, 2);
-  console.log(hours)
-
-  if (hours >= 5 && hours <= 11) {
+  if (hours >= 0 && hours <= 11) {
     document.getElementById("time-icon").src = "/assets/desktop/icon-sun.svg";
     greeting.textContent = "Good Morning, it's currently";
     if (desktop.matches) {
@@ -135,7 +173,7 @@ function setGreeting(time) {
     greeting.textContent = "Good Afternoon, its currently";
   }
 
-  if ((hours >= 18 && hours <= 23) || (hours >= 0 && hours <= 4)) 
+  if ((hours >= 18 && hours <= 23)) 
   {
     greeting.textContent = "Good evening, it's currently";
     document.getElementById("time-icon").src = "/assets/desktop/icon-moon.svg";
@@ -159,29 +197,8 @@ function setGreeting(time) {
   }
 }
 
-async function getQuote()
-{
-  const res = await fetch(QUOTABLE_URL)
-  const data = await res.json()
-  displayRandomQuote(data[0])
-}
-
-function updateTime(jsonObj) {
-  let timeDisplay = document.getElementById("time");
-  let timezoneAbbreviation = document.getElementById("tz-abbreviation");
-  let time = jsonObj["datetime"].slice(11, 16);
-  let timezoneDisplay = document.getElementById("timezone-display");
-  timezone = jsonObj["timezone"].replace("_", " ");
-  dayOfYear(jsonObj);
-  dayOfWeek(jsonObj);
-  weekNumber(jsonObj);
-  setGreeting(time);
-  timeDisplay.textContent = time;
-  timezoneDisplay.textContent = timezone;
-  timezoneAbbreviation.textContent = jsonObj["abbreviation"];
-}
 
 getQuote();
 getLocation();
-//setInterval(getTime, 1000);
+
 
