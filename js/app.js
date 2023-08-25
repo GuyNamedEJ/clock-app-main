@@ -71,7 +71,7 @@ function incrementClock(){
     min++;
   }
 
-  if(min === 59){
+  else if(seconds === 60 && min === 59){
     min = 0;
     seconds = 0;
     hours === 24 ? hours = 0 :  hours++;
