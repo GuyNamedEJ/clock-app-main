@@ -22,7 +22,7 @@ const QUOTABLE_URL = "https://api.quotable.io/quotes/random";
 async function getTime(){
   let response = await fetch(WORLD_TIME_URL)
   let timeData = await response.json();
-  console.log(timeData)
+
   updateTime(timeData)
 }
 
@@ -57,12 +57,7 @@ function updateTime(jsonObj) {
   timezoneDisplay.textContent = timezone;
   timezoneAbbreviation.textContent = jsonObj["abbreviation"];
 
- // Set interval occasionally causes flickering, need to clear interval after each second
-
-  let timer = setInterval(incrementClock, 1000)
-  setTimeout(function () {
-    clearInterval(timer);
-}, 10 * 1000);
+ setInterval(incrementClock, 1000)
 }
 
 
