@@ -56,7 +56,13 @@ function updateTime(jsonObj) {
   timeDisplay.textContent = time;
   timezoneDisplay.textContent = timezone;
   timezoneAbbreviation.textContent = jsonObj["abbreviation"];
-  setInterval(incrementClock, 1000)
+
+ // Set interval occasionally causes flickering, need to clear interval after each second
+
+  let timer = setInterval(incrementClock, 1000)
+  setTimeout(function () {
+    clearInterval(timer);
+}, 10 * 1000);
 }
 
 
