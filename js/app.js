@@ -63,15 +63,9 @@ function updateTime(jsonObj) {
 setInterval(setTime, 1000)
 
 async function setTime(){
-  // let response = await fetch(WORLD_TIME_URL)
-  // let timeData = await response.json();
-  //let time = timeData["datetime"].slice(11, 16);
   let date = new Date()
   let time = date.toLocaleTimeString("en-US",{timeZone: `${userTimezone}`, hour: "2-digit", minute: "2-digit"}).slice(0,5);
-  console.log(date.toLocaleTimeString().slice(0,5))
-  console.log(`Time zone is ${date.toLocaleTimeString("en-US",{timeZone: `${userTimezone}`,  hour: "2-digit", minute: "2-digit"}).slice(0,5)}`)
-   timeDisplay.textContent = time;
-   console.log(userTimezone)
+  timeDisplay.textContent = time;
 }
 
 
