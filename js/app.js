@@ -15,22 +15,23 @@ let mobile = window.matchMedia("(min-width: 376px) and (max-width: 767px)");
 let small = window.matchMedia("(max-width: 375px)");
 
 // API URLS
-const GEO_IP_URL = `https://geo.ipify.org/api/v2/country,city?apiKey=at_ILesY5Ea31ir7gLgwNkINdILMGjbw`;
+const GEO_IP_URL = `https://ipapi.co/json/`;
 const WORLD_TIME_URL = "https://worldtimeapi.org/api/ip/";
 const QUOTABLE_URL = "https://api.quotable.io/quotes/random";
 
 async function getTime(){
   let response = await fetch(WORLD_TIME_URL)
   let timeData = await response.json();
-
+  console.log(timeData)
   updateTime(timeData)
 }
 
 async function getLocation(){
   const response = await fetch(GEO_IP_URL);
   const data = await response.json();
-  city = data.location.city;
-  state = data.location.region;
+  console.log(data.city)
+  city = data.city;
+  state = data.region;
   getTime();
   setLocation(city, state);
 }
@@ -42,7 +43,6 @@ async function getQuote(){
 }
 
 function updateTime(jsonObj) {
- 
   let timezoneAbbreviation = document.getElementById("tz-abbreviation");
   let time = jsonObj["datetime"].slice(11, 16);
   let timeArray = time.split(":")
@@ -56,37 +56,19 @@ function updateTime(jsonObj) {
   timeDisplay.textContent = time;
   timezoneDisplay.textContent = timezone;
   timezoneAbbreviation.textContent = jsonObj["abbreviation"];
-
- setInterval(incrementClock, 1000)
 }
 
+setInterval(setTime, 1000)
 
-function incrementClock(){
-  let timeArray = timeDisplay.textContent.split(':')
-  let hours = parseInt(timeArray[0])
-  let min = parseInt(timeArray[1])
-
-  if(seconds === 60 && min < 59){
-    seconds = 0;
-    min++;
-  }
-
-  else if(seconds === 60 && min === 59){
-    min = 0;
-    seconds = 0;
-    hours === 24 ? hours = 0 :  hours++;
-  }
-
-  else{
-    seconds++;
-  }
-
-  let strHours = hours.toString().length < 2 ? hours.toString().padStart(2,'0') : hours.toString()
-  let strMin = min.toString().length < 2 ? min.toString().padStart(2,'0') : min.toString()
-  timeDisplay.textContent = `${strHours}:${strMin}`;
-  setGreeting(hours)
+async function setTime(){
+  // let response = await fetch(WORLD_TIME_URL)
+  // let timeData = await response.json();
+  //let time = timeData["datetime"].slice(11, 16);
+  let date = new Date()
+  let time = date.toLocaleTimeString().slice(0,5);
+  console.log(date.toLocaleTimeString().slice(0,5))
+   timeDisplay.textContent = time;
 }
-
 
 
 function dayOfYear(jsonObj) {
