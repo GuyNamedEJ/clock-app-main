@@ -49,14 +49,14 @@ function updateTime(jsonObj) {
   let timeArray = time.split(":")
   let hours = parseInt(timeArray[0])
   let timezoneDisplay = document.getElementById("timezone-display");
-  timezone = jsonObj["timezone"].replace("_", " ");
+  timezone = jsonObj["timezone"];
   userTimezone = timezone
   dayOfYear(jsonObj);
   dayOfWeek(jsonObj);
   weekNumber(jsonObj);
   setGreeting(hours)
   timeDisplay.textContent = time;
-  timezoneDisplay.textContent = timezone;
+  timezoneDisplay.textContent = timezone.replace("_", " ");
   timezoneAbbreviation.textContent = jsonObj["abbreviation"];
 }
 
@@ -67,9 +67,9 @@ async function setTime(){
   // let timeData = await response.json();
   //let time = timeData["datetime"].slice(11, 16);
   let date = new Date()
-  let time = date.toLocaleTimeString({timeZone: `${userTimezone}`}).slice(0,5);
+  let time = date.toLocaleTimeString({timeZone: `${userTimezone}`, hour: "2-digit", minute: "2-digit"}).slice(0,5);
   console.log(date.toLocaleTimeString().slice(0,5))
-  console.log(`Time zone is ${date.toLocaleTimeString({timeZone: `${userTimezone}`}).slice(0,5)}`)
+  console.log(`Time zone is ${date.toLocaleTimeString("en-US",{timeZone: `${userTimezone}`,  hour: "2-digit", minute: "2-digit"}).slice(0,5)}`)
    timeDisplay.textContent = time;
    console.log(userTimezone)
 }
