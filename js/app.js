@@ -7,6 +7,7 @@ let userIP;
 let city;
 let state;
 let seconds = 0;
+let userTimezone;
 
 // Media Queries
 let desktop = window.matchMedia("(min-width: 1400px)");
@@ -49,6 +50,7 @@ function updateTime(jsonObj) {
   let hours = parseInt(timeArray[0])
   let timezoneDisplay = document.getElementById("timezone-display");
   timezone = jsonObj["timezone"].replace("_", " ");
+  userTimezone = timezone
   dayOfYear(jsonObj);
   dayOfWeek(jsonObj);
   weekNumber(jsonObj);
@@ -65,8 +67,9 @@ async function setTime(){
   // let timeData = await response.json();
   //let time = timeData["datetime"].slice(11, 16);
   let date = new Date()
-  let time = date.toLocaleTimeString().slice(0,5);
+  let time = date.toLocaleTimeString({timeZone: `${userTimezone}`}).slice(0,5);
   console.log(date.toLocaleTimeString().slice(0,5))
+  console.log(`Time zone is ${date.toLocaleTimeString({timeZone: `${userTimezone}`}).slice(0,5)}`)
    timeDisplay.textContent = time;
 }
 
