@@ -67,7 +67,7 @@ async function setTime(){
   // let timeData = await response.json();
   //let time = timeData["datetime"].slice(11, 16);
   let date = new Date()
-  let time = date.toLocaleTimeString({timeZone: `${userTimezone}`, hour: "2-digit", minute: "2-digit"}).slice(0,5);
+  let time = date.toLocaleTimeString("en-US",{timeZone: `${userTimezone}`, hour: "2-digit", minute: "2-digit"}).slice(0,5);
   console.log(date.toLocaleTimeString().slice(0,5))
   console.log(`Time zone is ${date.toLocaleTimeString("en-US",{timeZone: `${userTimezone}`,  hour: "2-digit", minute: "2-digit"}).slice(0,5)}`)
    timeDisplay.textContent = time;
