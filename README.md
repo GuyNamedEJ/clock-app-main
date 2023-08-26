@@ -10,13 +10,8 @@
 This projects uses a few APIs to get data. 
  [World Time API](http://worldtimeapi.org/) to set the time based on the visitor's IP adress. This API will also be used for additional data, like the day of the year shown in the expanded state.
 - [IP Geolocation API](https://freegeoip.app/) to set the city and country underneath the time
-- [Programming Quotes API](https://programming-quotes-api.herokuapp.com/) to generate random programming quotes.(Currently not working after Heroku tier update)
+- [Quotable API](https://docs.quotable.io/) to generate random programming quotes.(Currently not working after Heroku tier update)
 
 ## Skills Learned/Practiced
 - Fetching Data from APIs
-
-## Upcoming Optimizations/Updates
-- Refactor code to gather data from APIs
-- Create animation of showing/hiding date information panel
-- Random background image for day/night
-- Replace now defunct Programming Quotes generator with a different one.
+- String Methods
