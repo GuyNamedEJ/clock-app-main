@@ -71,6 +71,7 @@ async function setTime(){
   console.log(date.toLocaleTimeString().slice(0,5))
   console.log(`Time zone is ${date.toLocaleTimeString({timeZone: `${userTimezone}`}).slice(0,5)}`)
    timeDisplay.textContent = time;
+   console.log(userTimezone)
 }
 
 
