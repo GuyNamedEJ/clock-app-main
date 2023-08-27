@@ -75,7 +75,7 @@ function setTime(){
   let date = new Date()
   let time = date.toLocaleTimeString("en-US",{timeZone: `${userTimezone}`, hour: "2-digit", minute: "2-digit", hour12: false}).slice(0,5);
   
-  let hours = (time.slice(0,2) === '24' || time.slice(0,2) === '00') ? hours = 0 : parseInt(time.slice(0,2))
+  let hours = time.slice(0,2) === '24' ?  hours = 0 : time.slice(0,2) === '00' ?  hours = 0 : parseInt(time.slice(0,2))
   console.log(hours)
   setGreeting(hours)
   timeDisplay.textContent = time;
