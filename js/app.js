@@ -1,8 +1,19 @@
-
+// UI Elements
 let toggleDetails = document.getElementById("toggle-details");
 let detailsSection = document.getElementById("details-section");
 let quoteSection = document.getElementById("quote-section");
 let timeDisplay = document.getElementById("time");
+let dayOfYearDisplay = document.getElementById("day-of-year-display");
+let dayOfWeekDisplay = document.getElementById("day-of-week-display");
+let timezoneAbbreviation = document.getElementById("tz-abbreviation");
+let timezoneDisplay = document.getElementById("timezone-display");
+let weekNumberDisplay = document.getElementById("week-number-display");
+let quoteDisplay = document.getElementById("quote");
+let authorDisplay = document.getElementById("author");
+let locationDisplay = document.getElementById("location");
+let greeting = document.getElementById("time-of-day");
+
+// variables
 let userIP;
 let city;
 let state;
@@ -20,89 +31,75 @@ const GEO_IP_URL = `https://ipapi.co/json/`;
 const WORLD_TIME_URL = "https://worldtimeapi.org/api/ip/";
 const QUOTABLE_URL = "https://api.quotable.io/quotes/random";
 
+
+
+/**
+ * Get the time data from the World Time API
+ * Pass the data to the updateDisplay function
+ */
+
 async function getTime(){
   let response = await fetch(WORLD_TIME_URL)
   let timeData = await response.json();
-  console.log(timeData)
-  updateTime(timeData)
+  updateDisplay(timeData)
 }
 
+/**
+ * Get the City, State based on the user's IP
+ * Set the location to the city and state
+ *  */ 
 async function getLocation(){
   const response = await fetch(GEO_IP_URL);
   const data = await response.json();
-  console.log(data.city)
   city = data.city;
   state = data.region;
-  getTime();
   setLocation(city, state);
 }
 
+/**
+ * Get the a quote and display it on the page
+ */
 async function getQuote(){
-  const res = await fetch(QUOTABLE_URL)
-  const data = await res.json()
+  const response = await fetch(QUOTABLE_URL)
+  const data = await response.json()
   displayRandomQuote(data[0])
 }
 
-function updateTime(jsonObj) {
-  let timezoneAbbreviation = document.getElementById("tz-abbreviation");
-  let time = jsonObj["datetime"].slice(11, 16);
-  let timeArray = time.split(":")
-  let hours = parseInt(timeArray[0])
-  let timezoneDisplay = document.getElementById("timezone-display");
-  timezone = jsonObj["timezone"];
+/**
+ * 
+ * @param {*} timeData 
+ */
+
+function updateDisplay(timeData) {
+  timezone = timeData["timezone"];
   userTimezone = timezone
-  dayOfYear(jsonObj);
-  dayOfWeek(jsonObj);
-  weekNumber(jsonObj);
+  setTimeDetails(timeData)
+  setTime();
+  timezoneDisplay.textContent = timezone.replace("_", " ");
+  timezoneAbbreviation.textContent = timeData["abbreviation"];
+}
+
+function setTime(){
+  let date = new Date()
+  let time = date.toLocaleTimeString("en-US",{timeZone: `${userTimezone}`, hour: "2-digit", minute: "2-digit", hour12: false}).slice(0,5);
+  let hours = parseInt(time.slice(0,2))
   setGreeting(hours)
   timeDisplay.textContent = time;
-  timezoneDisplay.textContent = timezone.replace("_", " ");
-  timezoneAbbreviation.textContent = jsonObj["abbreviation"];
 }
 
-setInterval(setTime, 1000)
-
-async function setTime(){
-  let date = new Date()
-  let time = date.toLocaleTimeString("en-US",{timeZone: `${userTimezone}`, hour: "2-digit", minute: "2-digit"}).slice(0,5);
-  timeDisplay.textContent = time;
-}
-
-
-function dayOfYear(jsonObj) {
-  let dayOfYearDisplay = document.getElementById("day-of-year-display");
-  let dayOfYear = jsonObj["day_of_year"];
-
-  dayOfYearDisplay.textContent = dayOfYear;
-}
-
-function dayOfWeek(jsonObj) {
-  let dayOfWeekDisplay = document.getElementById("day-of-week-display");
-  let dayOfWeek = jsonObj["day_of_week"];
-
-  dayOfWeekDisplay.textContent = dayOfWeek;
-}
-
-function weekNumber(jsonObj) {
-  let weekNumberDisplay = document.getElementById("week-number-display");
-  let weekNumber = jsonObj["week_number"];
-
-  weekNumberDisplay.textContent = weekNumber;
+function setTimeDetails(timeData){
+  dayOfYearDisplay.textContent = timeData["day_of_year"];
+  dayOfWeekDisplay.textContent = timeData["day_of_week"];
+  weekNumberDisplay.textContent = timeData["week_number"];
 }
 
 function displayRandomQuote(randomQuoteObj) {
-  let quoteDisplay = document.getElementById("quote");
-  let authorDisplay = document.getElementById("author");
-
   quoteDisplay.textContent = '"' + randomQuoteObj.content + '"';
   authorDisplay.textContent = randomQuoteObj.author;
 }
 
 function setLocation(city, state) {
-  let locationDisplay = document.getElementById("location");
-  locationDisplay.textContent =
-    "in " + city + ", " + state;
-  
+  locationDisplay.textContent = `in ${city}, ${state}`
 }
 
 function showHide() {
@@ -127,27 +124,28 @@ function showHide() {
 }
 
 function setGreeting(hours) {
-  let greeting = document.getElementById("time-of-day");
+  
 
   if (hours >= 0 && hours <= 11) {
     document.getElementById("time-icon").src = "/assets/desktop/icon-sun.svg";
     greeting.textContent = "Good Morning, it's currently";
-    if (desktop.matches) {
-      document.body.style.background =
-        "url('/assets/desktop/bg-image-daytime.jpg') rgba(0, 0, 0, 0.3)";
-    }
-    if (tablet.matches) {
-      document.body.style.background =
-        "url('/assets/tablet/bg-image-daytime.jpg') rgba(0, 0, 0, 0.3)";
-    }
+    
+    document.body.style.background =
+        "url('https://source.unsplash.com/random/?night/') rgba(0, 0, 0, 0.3)";
 
-    if (mobile.matches || small.matches) {
-      document.body.style.background =
-        "url('/assets/mobile/bg-image-daytime.jpg') rgba(0, 0, 0, 0.3)";
-    }
+    // if (desktop.matches) {
+    //   document.body.style.background =
+    //     "url('https://source.unsplash.com/random/?morning/') rgba(0, 0, 0, 0.3)";
+    // }
+    // if (tablet.matches) {
+    //   document.body.style.background =
+    //   "url('https://source.unsplash.com/random/?morning/') rgba(0, 0, 0, 0.3)";
+    // }
 
-    document.body.style.backgroundRepeat = "no-repeat";
-    document.body.style.backgroundSize = "cover";
+    // if (mobile.matches || small.matches) {
+    //   document.body.style.background =
+    //     "url('https://source.unsplash.com/random/?morning/') rgba(0, 0, 0, 0.3)";
+    // }
   }
 
   if (hours >= 12 && hours <= 17) {
@@ -158,29 +156,31 @@ function setGreeting(hours) {
   {
     greeting.textContent = "Good evening, it's currently";
     document.getElementById("time-icon").src = "/assets/desktop/icon-moon.svg";
+    document.body.style.background =
+        "url('https://source.unsplash.com/random/?night/') rgba(0, 0, 0, 0.3)";
    
-    if (desktop.matches) {
-      document.body.style.background =
-        "url('/assets/desktop/bg-image-nighttime.jpg') rgba(0, 0, 0, 0.3)";
-    }
-    if (tablet.matches) {
-      document.body.style.background =
-        "url('/assets/tablet/bg-image-nighttime.jpg') rgba(0, 0, 0, 0.3)";
-    }
+    // if (desktop.matches) {
+    //   document.body.style.background =
+    //     "url('https://source.unsplash.com/random/?night/') rgba(0, 0, 0, 0.3)";
+    // }
+    // if (tablet.matches) {
+    //   document.body.style.background =
+    //     "url('https://source.unsplash.com/random/?night/') rgba(0, 0, 0, 0.3)";
+    // }
 
-    if (mobile.matches || small.matches) {
-      document.body.style.background =
-        "url('/assets/mobile/bg-image-nighttime.jpg') rgba(0, 0, 0, 0.3)";
-    }
+    // if (mobile.matches || small.matches) {
+    //   document.body.style.background =
+    //     "url('https://source.unsplash.com/random/?night/') rgba(0, 0, 0, 0.3)";
+    // }
+  }
 
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundPosition = "center"
-  }
 }
 
-
+getTime();
 getQuote();
 getLocation();
-
+setInterval(setTime, 1000)
 
