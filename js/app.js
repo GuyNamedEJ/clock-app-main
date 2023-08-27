@@ -94,7 +94,7 @@ function setLocation(city, state) {
   locationDisplay.textContent = `in ${city}, ${state}`
 }
 
-function showHide() {
+function toggleDetails() {
   let buttonText = document.getElementById("button-text");
   let arrow = document.getElementById("arrow");
 
@@ -116,8 +116,6 @@ function showHide() {
 }
 
 function setGreeting(hours) {
-  
-
   if (hours >= 0 && hours <= 6) {
     document.getElementById("time-icon").src = "/assets/desktop/icon-sun.svg";
     greeting.textContent = "Good Morning, it's currently";
