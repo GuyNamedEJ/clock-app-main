@@ -20,18 +20,10 @@ let state;
 let seconds = 0;
 let userTimezone;
 
-// Media Queries
-let desktop = window.matchMedia("(min-width: 1400px)");
-let tablet = window.matchMedia("(max-width: 768px)");
-let mobile = window.matchMedia("(min-width: 376px) and (max-width: 767px)");
-let small = window.matchMedia("(max-width: 375px)");
-
 // API URLS
 const GEO_IP_URL = `https://ipapi.co/json/`;
 const WORLD_TIME_URL = "https://worldtimeapi.org/api/ip/";
 const QUOTABLE_URL = "https://api.quotable.io/quotes/random";
-
-
 
 /**
  * Get the time data from the World Time API
@@ -131,20 +123,6 @@ function setGreeting(hours) {
     greeting.textContent = "Good Morning, it's currently";
     document.body.style.background =
         "url('https://source.unsplash.com/random/?morning/') rgba(0, 0, 0, 0.3)";
-
-    // if (desktop.matches) {
-    //   document.body.style.background =
-    //     "url('https://source.unsplash.com/random/?morning/') rgba(0, 0, 0, 0.3)";
-    // }
-    // if (tablet.matches) {
-    //   document.body.style.background =
-    //   "url('https://source.unsplash.com/random/?morning/') rgba(0, 0, 0, 0.3)";
-    // }
-
-    // if (mobile.matches || small.matches) {
-    //   document.body.style.background =
-    //     "url('https://source.unsplash.com/random/?morning/') rgba(0, 0, 0, 0.3)";
-    // }
   }
 
   if (hours >= 12 && hours <= 17) {
@@ -160,19 +138,6 @@ function setGreeting(hours) {
     document.body.style.background =
         "url('https://source.unsplash.com/random/?night/') rgba(0, 0, 0, 0.3)";
    
-    // if (desktop.matches) {
-    //   document.body.style.background =
-    //     "url('https://source.unsplash.com/random/?night/') rgba(0, 0, 0, 0.3)";
-    // }
-    // if (tablet.matches) {
-    //   document.body.style.background =
-    //     "url('https://source.unsplash.com/random/?night/') rgba(0, 0, 0, 0.3)";
-    // }
-
-    // if (mobile.matches || small.matches) {
-    //   document.body.style.background =
-    //     "url('https://source.unsplash.com/random/?night/') rgba(0, 0, 0, 0.3)";
-    // }
   }
 
     document.body.style.backgroundRepeat = "no-repeat";
