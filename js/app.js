@@ -73,7 +73,7 @@ function updateDisplay(timeData) {
 
 function setTime(){
   let date = new Date()
-  let time = date.toLocaleTimeString("en-US",{timeZone: `${userTimezone}`, hour: "2-digit", minute: "2-digit", hour12: false}).slice(0,5);
+  let time = date.toLocaleTimeString("en-US",{timeZone: `${userTimezone}`, hour: "2-digit", minute: "2-digit", hourCycle: "h23"}).slice(0,5);
   let hours = parseInt(time.slice(0,2))
   setGreeting(hours)
   timeDisplay.textContent = time;
