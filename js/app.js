@@ -129,9 +129,8 @@ function setGreeting(hours) {
   if (hours >= 0 && hours <= 11) {
     document.getElementById("time-icon").src = "/assets/desktop/icon-sun.svg";
     greeting.textContent = "Good Morning, it's currently";
-    
     document.body.style.background =
-        "url('https://source.unsplash.com/random/?night/') rgba(0, 0, 0, 0.3)";
+        "url('https://source.unsplash.com/random/?morning/') rgba(0, 0, 0, 0.3)";
 
     // if (desktop.matches) {
     //   document.body.style.background =
@@ -150,6 +149,8 @@ function setGreeting(hours) {
 
   if (hours >= 12 && hours <= 17) {
     greeting.textContent = "Good Afternoon, its currently";
+    document.body.style.background =
+        "url('https://source.unsplash.com/random/?afternoon/') rgba(0, 0, 0, 0.3)";
   }
 
   if ((hours >= 18 && hours <= 23)) 
