@@ -1,5 +1,4 @@
 // UI Elements
-let detailsBtn = document.getElementById("toggle-btn");
 let detailsSection = document.getElementById("details-section");
 let quoteSection = document.getElementById("quote-section");
 let timeDisplay = document.getElementById("time");
