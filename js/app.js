@@ -75,6 +75,7 @@ function setTime(){
   let date = new Date()
   let time = date.toLocaleTimeString("en-US",{timeZone: `${userTimezone}`, hour: "2-digit", minute: "2-digit", hour12: false}).slice(0,5);
   let hours = parseInt(time.slice(0,2))
+  console.log(hours)
   setGreeting(hours)
   timeDisplay.textContent = time;
 }
@@ -118,7 +119,14 @@ function showHide() {
 function setGreeting(hours) {
   
 
-  if (hours >= 0 && hours <= 11) {
+  if (hours >= 0 && hours <= 6) {
+    document.getElementById("time-icon").src = "/assets/desktop/icon-sun.svg";
+    greeting.textContent = "Good Morning, it's currently";
+    document.body.style.background =
+        "url('https://source.unsplash.com/random/?night/') rgba(0, 0, 0, 0.3)";
+  }
+
+  if (hours >= 7 && hours <= 11) {
     document.getElementById("time-icon").src = "/assets/desktop/icon-sun.svg";
     greeting.textContent = "Good Morning, it's currently";
     document.body.style.background =
