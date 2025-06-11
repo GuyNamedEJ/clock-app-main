@@ -11,6 +11,7 @@ let quoteDisplay = document.getElementById("quote");
 let authorDisplay = document.getElementById("author");
 let locationDisplay = document.getElementById("location");
 let greeting = document.getElementById("time-of-day");
+let currentTime;
 
 // variables
 let userIP;
@@ -61,21 +62,42 @@ async function getQuote(){
  * @param {*} timeData 
  */
 
-function updateDisplay(timeData) {
-  timezone = timeData["timezone"];
-  userTimezone = timezone
-  setTimeDetails(timeData)
-  setTime();
-  timezoneDisplay.textContent = timezone.replace("_", " ");
-  timezoneAbbreviation.textContent = timeData["abbreviation"];
+// function updateDisplay(timeData) {
+//   timezone = timeData["timezone"];
+//   userTimezone = timezone
+//   setTimeDetails(timeData)
+//   setTime();
+//   timezoneDisplay.textContent = timezone.replace("_", " ");
+//   timezoneAbbreviation.textContent = timeData["abbreviation"];
+// }
+
+function updateDisplay(timeData){
+  currentTime = new Date(timeData.datetime);
+  setTime()
+  setInterval(incrementTime, 1000); // start local time updates
 }
 
-function setTime(){
-  let date = new Date()
-  let time = date.toLocaleTimeString("en-US",{timeZone: `${userTimezone}`, hour: "2-digit", minute: "2-digit", hourCycle: "h23"}).slice(0,5);
-  let hours = parseInt(time.slice(0,2))
-  setGreeting(hours)
-  timeDisplay.textContent = time;
+function incrementTime() {
+  currentTime = new Date(currentTime.getTime() + 1000); // add 1 second
+  setTime();
+}
+
+// function setTime(){
+//   let date = new Date()
+//   let time = date.toLocaleTimeString("en-US",{timeZone: `${userTimezone}`, hour: "2-digit", minute: "2-digit", hourCycle: "h23"}).slice(0,5);
+//   let hours = parseInt(time.slice(0,2))
+//   // setGreeting(hours)
+//   timeDisplay.textContent = time;
+// }
+
+function setTime() {
+  let hours = currentTime.getHours();
+  let minutes = currentTime.getMinutes().toString().padStart(2, "0");
+  let formattedTime = `${hours}:${minutes}`;
+
+  // Update greeting and UI
+  setGreeting(hours);
+  timeDisplay.textContent = formattedTime;
 }
 
 function setTimeDetails(timeData){
@@ -150,7 +172,7 @@ function setGreeting(hours) {
 }
 
 getTime();
-getQuote();
+// getQuote();
 getLocation();
-setInterval(setTime, 1000)
+setTime()
 

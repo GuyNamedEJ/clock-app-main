@@ -4,59 +4,68 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/style.css" />
-    <title>GuyNamedEJ | Clock App</title>
+    <title>EJ Milord | Clock App</title>
   </head>
   <body>
-    <section class="container">
-      <div id="quote-section">
-        <p id="quote">
-          
-        </p>
-        <p id="author"></p>
-      </div>
+    <main>
+      <section class="container">
+        <!--Quote Section-->
+        <div id="quote-section">
+          <p id="quote">
+            If you don't like something, change it. If you can't change it,
+            change your attitude.
+          </p>
+          <p id="author">Maya Angelou</p>
+        </div>
+        <!--Quote Section End-->
 
-      <div id="time-block">
-        <p id="greeting">
-          <img id = "time-icon" src="/assets/desktop/icon-sun.svg" alt="icon-sun" /><span
-            id="time-of-day"
-            ></span
-          >
-        </p>
-        <h1 id="time"></h1>
-        <span id="tz-abbreviation"></span>
-        <div id="lower-flex">
-          <h3 id="location"></h3>
-          <button id="toggle-details" class="hide" onclick="toggleDetails()">
-            <span id="button-text">More</span>
-            <img id="arrow" src="/assets/desktop/icon-arrow-up.svg" alt="" />
-          </button>
-        </div>
-      </div>
-    </section>
+        <section class="time-display">
+          <div id="time-block">
+            <p id="greeting">
+              <img
+                id="time-icon"
+                src="/assets/desktop/icon-sun.svg"
+                alt="icon-sun"
+              /><span id="time-of-day"></span>
+            </p>
+            <h1 id="time"></h1>`
+            <span id="tz-abbreviation"></span>
+            <div id="lower-flex">
+              <h3 id="location"></h3>
+              <button id="toggle-details" class="hide" onclick="toggleDetails()">
+                <span id="button-text">More</span>
+                <img id="arrow" src="/assets/desktop/icon-arrow-up.svg" alt="" />
+              </button>
+            </div>
+          </div>
+        </section>
+        
+      </section>
 
-    <section id="details-section" class="flex-container">
-      <div id="details-left">
-        <div class="current-timezone">
-          <h6>Current Timezone</h6>
-          <h2 id="timezone-display">Europe/London</h2>
+      <section id="details-section" class="flex-container">
+        <div id="details-left">
+          <div class="current-timezone">
+            <h6>Current Timezone</h6>
+            <h2 id="timezone-display">Europe/London</h2>
+          </div>
+          <div id="day-of-year" class="day-of-year">
+            <h6>Day of the year</h6>
+            <h2 id="day-of-year-display">300</h2>
+          </div>
         </div>
-        <div id="day-of-year" class="day-of-year">
-          <h6>Day of the year</h6>
-          <h2 id="day-of-year-display">300</h2>
-        </div>
-      </div>
 
-      <div id="details-right">
-        <div class="day-of-week">
-          <h6>Day of the week</h6>
-          <h2 id="day-of-week-display">5</h2>
+        <div id="details-right">
+          <div class="day-of-week">
+            <h6>Day of the week</h6>
+            <h2 id="day-of-week-display">5</h2>
+          </div>
+          <div id="week-of-year" class="week-of-year">
+            <h6>Week Number</h6>
+            <h2 id="week-number-display">42</h2>
+          </div>
         </div>
-        <div id="week-of-year" class="week-of-year">
-          <h6>Week Number</h6>
-          <h2 id="week-number-display">42</h2>
-        </div>
-      </div>
-    </section>
-    <script src="/js/app.js"></script>
+      </section>
+    </main>
+    <script src="js/app.js"></script>
   </body>
 </html>

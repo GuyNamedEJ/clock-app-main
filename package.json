@@ -4,13 +4,24 @@
   "description": "<a href=\"https://project-globetrotter.netlify.app/\" target=\"_blank\">\r <img src=\"https://github.com/GuyNamedEJ/GuyNamedEJ/raw/main/clock-prev.gif\"/>\r </a>",
   "main": "config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.7.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GuyNamedEJ/clock-app-main.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/GuyNamedEJ/clock-app-main/issues"
+  },
+  "homepage": "https://github.com/GuyNamedEJ/clock-app-main#readme"
 }
